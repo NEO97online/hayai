@@ -383,12 +383,9 @@ get_ip_string_from_socket :: (socket: s32) -> string {
 
 
 
-#if ENABLE_HTTPS {
-  #import,dir "modules/openssl";
-}
-
-#import,dir "modules/mybasic";
-#import,dir "modules/mysocket";
+#if ENABLE_HTTPS #import,dir "../modules/openssl";
+#import,dir "../modules/mybasic";
+#import,dir "../modules/mysocket";
 
 #import "POSIX";
 #import "File";

@@ -42,7 +42,7 @@ fromcstr :: (cstr: *u8) -> string {
   return ret;
 }
 
-getms :: () -> float64 { return cast(float64)(get_time()*1000); }
+getms :: () -> float64 { return cast(float64)(seconds_since_init()*1000); }
 
 
 using #import "Hash_Table";

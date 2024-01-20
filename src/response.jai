@@ -27,10 +27,10 @@ send_html :: (request: *Request, html: string, status_code: u16 = 200, content_t
 
   http_response := tprint("HTTP/1.1 % OK\r\nContent-Length: %\r\nContent-Type: %; charset=UTF-8%\r\n\r\n%", status_code, html.count, content_type, headers_str, html);
 
-  print("[DEBUG] send_html response: \n%\n", tprint("HTTP/1.1 % OK\r\nContent-Length: %\r\nContent-Type: %; charset=UTF-8%\r\n\r", status_code, html.count, content_type, headers_str));
+  // print("[DEBUG] send_html response: \n%\n", tprint("HTTP/1.1 % OK\r\nContent-Length: %\r\nContent-Type: %; charset=UTF-8%\r\n\r", status_code, html.count, content_type, headers_str));
 
   bytes_sent := mysocket_write(request.socket, http_response);
-  print("bytes_sent: %\n", bytes_sent);
+  // print("bytes_sent: %\n", bytes_sent);
   request.response_sent = true;
 }
 

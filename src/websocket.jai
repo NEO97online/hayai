@@ -156,7 +156,7 @@ websocket_handle_request :: (request: *Request) {
 
     hash_ws_key :: (Sec_WebSocket_Key: string) -> string {
       data := join(Sec_WebSocket_Key, "258EAFA5-E914-47DA-95CA-C5AB0DC85B11",, temp);
-      websocket_key_hash := base64_encode(xx sha1_binary(data)); #import,dir "modules/sha1"; #import "Base64";
+      websocket_key_hash := base64_encode(xx sha1_binary(data)); #import,dir "../modules/sha1"; #import "Base64";
       return websocket_key_hash;
     }
     websocket_key_response := hash_ws_key(request.websocket_key);

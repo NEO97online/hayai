@@ -251,8 +251,8 @@ recv_http_request :: (socket: MySocket) -> Request {
 
 
 
-#import,dir "modules/mybasic";
-#import,dir "modules/mysocket";
+#import,dir "../modules/mybasic";
+#import,dir "../modules/mysocket";
 
 #import "Windows";
 #import "File";
