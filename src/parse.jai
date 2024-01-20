@@ -21,6 +21,9 @@ tprint_no_must :: (format_string: string, args: .. Any) -> string {
     return builder_to_string(*builder,, allocator = __temporary_allocator);
 } @PrintLike
 
+template :: (html: string, caller := #caller_code) -> string #expand {
+    return #insert,scope(caller) #run parse_html(html);
+}
 
 parse_html :: (html: string) -> string {
     state := ParseState.NONE;
@@ -70,7 +73,7 @@ parse_html :: (html: string) -> string {
     }
 
     template := builder_to_string(*template_builder);
-    // print("template: %\n", template);
+    print("template: %\n", template);
 
     params := builder_to_string(*params_builder);
     // print("params: %\n", params);

@@ -47,16 +47,16 @@ main :: () {
 
 Often, we want to build some HTML to send to the client. Hayai makes this easy, while doing as much as possible at compile time.
 
-To do this, Hayai provides a `parse_html` function which can be ran at compile time to generate a `tprint` statement that inserts your variables into HTML strings. This is a very simple yet effective form of templating.
+To do this, Hayai provides a `template` macro which is evaluated at compile time to generate a `tprint` statement that inserts your variables into HTML strings. This is a very simple yet effective form of templating.
 
-To insert dynamic content into a template using `parse_html`, wrap any Jai expression in `#{}`. If you use `#insert #run parse_html`, your template will be able to access anything in the scope that it is called from.
+To insert dynamic content into an HTML string using the `template` macro, wrap any Jai expression in `#{}`. If you use `template`, your template will be able to access anything in the scope that it is called from.
 
 ```c
 // We will define a function which generates an HTML document based on a given head and body.
 // This will be our base for all endpoints. Global CSS and Scripts can go here.
 
 make_document :: (head: string, body: string) -> string {
-    return #insert #run parse_html(#string __HTML
+    return template(#string __HTML
         <!doctype html>
         <html>
         <head>
@@ -83,8 +83,8 @@ main :: () {
         // for this route, the head never changes, so it can be a compile-time constant.
         head :: "<title>Greetings</title>"
 
-        // the body is dynamic, so we'll use parse_html to create a dynamic template.
-        body := #insert #run parse_html(#string __HTML
+        // the body is dynamic, so we'll use template to create a dynamic template.
+        body := template(#string __HTML
             <main>
                 <h1>Hello, #{name}!</h1>
             </main>
@@ -129,7 +129,7 @@ Button :: (
     class := "",
     attrs := "",
 ) -> string {
-    return #insert #run parse_html(#string __HTML
+    return template(#string __HTML
         <button type="#{type}" class="rounded-md #{bg_color} #{text_color} #{class}" #{attrs}>
             #{text}
         </button>
@@ -141,7 +141,7 @@ Then we could use it within other templates like so:
 
 ```c
 some_page :: () -> string {
-    return #insert #run parse_html(#string __HTML
+    return template(#string __HTML
         <main>
             <h1>Button example</h1>
             #{Button(
