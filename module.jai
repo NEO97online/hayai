@@ -1,0 +1,1 @@
+#load "src/hayai.jai";
